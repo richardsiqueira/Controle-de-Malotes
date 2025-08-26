@@ -4,51 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Malotes</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Bibliotecas para exportação -->
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <style>
         .fade-in { animation: fadeIn 0.3s ease-in; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        /* Estilos para impressão */
-        @media print {
-            body * { visibility: hidden; }
-            .print-area, .print-area * { visibility: visible; }
-            .print-area { 
-                position: absolute; 
-                left: 0; 
-                top: 0; 
-                width: 100%; 
-                background: white;
-                padding: 20px;
-            }
-            .no-print { display: none !important; }
-            .print-header { 
-                text-align: center; 
-                margin-bottom: 30px; 
-                border-bottom: 2px solid #333;
-                padding-bottom: 15px;
-            }
-            table { 
-                width: 100% !important; 
-                border-collapse: collapse !important;
-                font-size: 12px !important;
-            }
-            th, td { 
-                border: 1px solid #333 !important; 
-                padding: 8px !important;
-                text-align: left !important;
-            }
-            th { 
-                background-color: #f0f0f0 !important; 
-                font-weight: bold !important;
-            }
-        }
     </style>
+</head>
+<body>
+</body>
+</html>
+        
+  <style>
+    /* Estilos para impressão */
+    @media print {
+        body * { visibility: hidden; }
+        .print-area, .print-area * { visibility: visible; }
+        .print-area { 
+            position: absolute; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            background: white;
+            padding: 20px;
+        }
+        .no-print { display: none !important; }
+        .print-header { 
+            text-align: center; 
+            margin-bottom: 30px; 
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+        }
+        table { 
+            width: 100% !important; 
+            border-collapse: collapse !important;
+            font-size: 12px !important;
+        }
+        th, td { 
+            border: 1px solid #333 !important; 
+            padding: 8px !important;
+            text-align: left !important;
+        }
+        th { 
+            background-color: #f0f0f0 !important; 
+            font-weight: bold !important;
+        }
+    }
+</style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
     <!-- Tela de Login -->
@@ -62,7 +67,7 @@
             <form id="loginForm" class="space-y-6">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <input type="text" id="loginEmail" required 
+                    <input type="email" id="loginEmail" required 
                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                 </div>
                 
@@ -87,53 +92,53 @@
         </div>
     </div>
 
-    <!-- Tela de Cadastro -->
-    <div id="registerScreen" class="min-h-screen flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
-            <div class="text-center mb-8">
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">Cadastro</h1>
-                <p class="text-gray-600">Crie sua conta</p>
+<!-- Tela de Cadastro -->
+<div id="registerScreen" class="min-h-screen flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Cadastro</h1>
+            <p class="text-gray-600">Crie sua conta</p>
+        </div>
+        
+        <form id="registerForm" class="space-y-6">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nome Completo</label>
+                <input type="text" id="registerName" required 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
             </div>
             
-            <form id="registerForm" class="space-y-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Nome Completo</label>
-                    <input type="text" id="registerName" required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <input type="email" id="registerEmail" required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
-                    <input type="password" id="registerPassword" required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Confirmar Senha</label>
-                    <input type="password" id="confirmPassword" required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                </div>
-                
-                <button type="submit" 
-                        class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-200 font-medium">
-                    Cadastrar
-                </button>
-                
-                <button type="button" onclick="showLogin()" 
-                        class="w-full bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 transition duration-200 font-medium">
-                    Voltar ao Login
-                </button>
-            </form>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <input type="email" id="registerEmail" required 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
             
-            <div id="registerMessage" class="mt-4 text-center hidden"></div>
-        </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
+                <input type="password" id="registerPassword" required 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Confirmar Senha</label>
+                <input type="password" id="confirmPassword" required 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+            
+            <button type="submit" 
+                    class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-200 font-medium">
+                Cadastrar
+            </button>
+            
+            <button type="button" onclick="showLogin()" 
+                    class="w-full bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 transition duration-200 font-medium">
+                Voltar ao Login
+            </button>
+        </form>
+        
+        <div id="registerMessage" class="mt-4 text-center text-red-600 hidden"></div>
     </div>
+</div>
 
     <!-- Tela Principal -->
     <div id="mainScreen" class="hidden min-h-screen">
@@ -181,700 +186,1141 @@
         </div>
 
         <!-- Header -->
-        <div class="bg-white shadow-lg">
-            <div class="flex items-center justify-between p-4">
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-gray-800">Controle de Malotes</h1>
-                </div>
-                <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
-                    <i class="fas fa-sign-out-alt mr-2"></i>Sair
-                </button>
-            </div>
+<div class="bg-white shadow-lg">
+    <div class="flex items-center justify-between p-4">
+        <div class="flex items-center">
+            <h1 class="text-2xl font-bold text-gray-800">Controle de Malotes</h1>
         </div>
-
-        <!-- Conteúdo Principal -->
-        <div class="p-6">
-            <!-- Seção Malotes -->
-            <div id="malotesSection" class="fade-in">
-                <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Controle de Malotes</h2>
-                    
-                    <!-- Estoque Atual -->
-                    <div class="bg-blue-50 p-4 rounded-lg mb-6">
-                        <h3 class="text-lg font-semibold text-blue-800 mb-2">📦 Estoque Atual</h3>
-                        <p class="text-2xl font-bold text-blue-600" id="malotesStock">0 malotes</p>
-                    </div>
-                    
-                    <!-- Entrada de Malotes -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div class="bg-green-50 p-4 rounded-lg">
-                            <h3 class="text-lg font-semibold text-green-800 mb-4">➕ Entrada de Malotes</h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Quantidade</label>
-                                    <input type="number" id="malotesEntrada" min="1" placeholder="Ex: 10" 
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
-                                </div>
-                                <button onclick="adicionarMalotes()" 
-                                        class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
-                                    Adicionar ao Estoque
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Troca de Malotes -->
-                        <div class="bg-orange-50 p-4 rounded-lg">
-                            <h3 class="text-lg font-semibold text-orange-800 mb-4">🔄 Troca de Malote</h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Cidade *</label>
-                                    <input type="text" id="maloteCidade" placeholder="Ex: Campo Grande" required
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Número do Malote *</label>
-                                    <input type="text" id="maloteNumero" placeholder="Ex: M-001" required
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Motivo da Troca *</label>
-                                    <input type="text" id="maloteMotivo" placeholder="Ex: Malote danificado" required
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
-                                </div>
-                                <button onclick="trocarMalote()" 
-                                        class="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition">
-                                    Registrar Troca
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Histórico de Movimentações -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">📋 Histórico de Movimentações</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full border-collapse bg-white">
-                                <thead>
-                                    <tr class="bg-gray-50">
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tipo</th>
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Quantidade</th>
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Motivo</th>
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Data</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="malotesHistorico">
-                                    <!-- Dados serão inseridos aqui -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Seção Leituras -->
-            <div id="leiturasSection" class="hidden fade-in">
-                <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                    <div class="mb-6">
-                        <div id="greetingMessage" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-lg mb-4">
-                            <h3 class="text-lg font-semibold">Carregando...</h3>
-                        </div>
-                        <h2 class="text-xl font-bold text-gray-800">Leitura de Códigos</h2>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Campo de Leitura (Digite manualmente ou use o leitor)</label>
-                        <input type="text" id="barcodeInput" placeholder="Digite o código ou escaneie com o leitor..." 
-                               class="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg">
-                        <p class="text-sm text-gray-600 mt-2">💡 Digite o código e pressione Enter para registrar</p>
-                        
-                        <!-- Área de feedback -->
-                        <div id="feedbackMessage" class="mt-3 p-3 rounded-lg hidden">
-                            <span id="feedbackText"></span>
-                        </div>
-                    </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full border-collapse bg-white">
-                            <thead>
-                                <tr class="bg-gray-50">
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Filial</th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tipo</th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Data</th>
-                                </tr>
-                            </thead>
-                            <tbody id="malotesTable">
-                                <!-- Dados serão inseridos aqui -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Outras seções (placeholder) -->
-            <div id="cadeadosSection" class="hidden fade-in">
-                <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Controle de Cadeados</h2>
-                    
-                    <!-- Estoque Atual -->
-                    <div class="bg-purple-50 p-4 rounded-lg mb-6">
-                        <h3 class="text-lg font-semibold text-purple-800 mb-2">🔒 Estoque Atual</h3>
-                        <p class="text-2xl font-bold text-purple-600" id="cadeadosStock">0 cadeados</p>
-                    </div>
-                    
-                    <!-- Entrada de Cadeados -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div class="bg-green-50 p-4 rounded-lg">
-                            <h3 class="text-lg font-semibold text-green-800 mb-4">➕ Entrada de Cadeados</h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Quantidade</label>
-                                    <input type="number" id="cadeadosEntrada" min="1" placeholder="Ex: 15" 
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
-                                </div>
-                                <button onclick="adicionarCadeados()" 
-                                        class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
-                                    Adicionar ao Estoque
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Troca de Cadeados -->
-                        <div class="bg-orange-50 p-4 rounded-lg">
-                            <h3 class="text-lg font-semibold text-orange-800 mb-4">🔄 Troca de Cadeado</h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Cidade *</label>
-                                    <input type="text" id="cadeadoCidade" placeholder="Ex: Dourados" required
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Número do Cadeado *</label>
-                                    <input type="text" id="cadeadoNumero" placeholder="Ex: C-001" required
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Motivo da Troca *</label>
-                                    <input type="text" id="cadeadoMotivo" placeholder="Ex: Cadeado quebrado" required
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
-                                </div>
-                                <button onclick="trocarCadeado()" 
-                                        class="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition">
-                                    Registrar Troca
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Histórico de Movimentações -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">📋 Histórico de Movimentações</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full border-collapse bg-white">
-                                <thead>
-                                    <tr class="bg-gray-50">
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tipo</th>
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Quantidade</th>
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Motivo</th>
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Data</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="cadeadosHistorico">
-                                    <!-- Dados serão inseridos aqui -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="lavagemSection" class="hidden fade-in">
-                <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Controle de Lavagem</h2>
-                    
-                    <!-- Registro de Lavagem -->
-                    <div class="bg-cyan-50 p-4 rounded-lg mb-6">
-                        <h3 class="text-lg font-semibold text-cyan-800 mb-4">🧼 Registro de Lavagem</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Cidade *</label>
-                                <input type="text" id="lavagemCidade" placeholder="Ex: Campo Grande" required
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Número *</label>
-                                <input type="text" id="lavagemNumero" placeholder="Ex: L-001" required
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
-                            </div>
-                        </div>
-                        <button onclick="registrarLavagem()" 
-                                class="w-full mt-4 bg-cyan-600 text-white py-2 rounded-lg hover:bg-cyan-700 transition">
-                            Registrar Lavagem
-                        </button>
-                    </div>
-                    
-                    <!-- Histórico de Lavagens -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">📋 Histórico de Lavagens</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full border-collapse bg-white">
-                                <thead>
-                                    <tr class="bg-gray-50">
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Cidade</th>
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Número</th>
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Data</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="lavagemHistorico">
-                                    <!-- Dados serão inseridos aqui -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="trocaSection" class="hidden fade-in">
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">🔄 Registro de Trocas</h2>
-                    <p class="text-gray-600 mb-6">Histórico de todas as trocas de malotes e cadeados realizadas</p>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full border-collapse bg-white">
-                            <thead>
-                                <tr class="bg-gray-50">
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Filial</th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tipo</th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Troca</th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Motivo</th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Data</th>
-                                </tr>
-                            </thead>
-                            <tbody id="trocasTable">
-                                <!-- Dados serão inseridos aqui -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Seção Filiais -->
-            <div id="filiaisSection" class="hidden fade-in">
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">🏢 Controle de Filiais</h2>
-                    
-                    <!-- Filtros -->
-                    <div class="bg-gray-50 p-6 rounded-lg mb-6">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Filtros</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                            <!-- Filtro por Status -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Status de Leitura</label>
-                                <select id="statusFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="filterFiliais()">
-                                    <option value="">Todas as filiais</option>
-                                    <option value="lidas">Filiais com leituras</option>
-                                    <option value="nao-lidas">Filiais sem leituras</option>
-                                </select>
-                            </div>
-                            
-                            <!-- Filtro por Tipo -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Operação</label>
-                                <select id="tipoFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="filterFiliais()">
-                                    <option value="">Todos os tipos</option>
-                                    <option value="cargas">Cargas</option>
-                                    <option value="passagens">Passagens</option>
-                                </select>
-                            </div>
-                            
-                            <!-- Filtro por Período -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Período de Análise</label>
-                                <select id="periodoFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="filterFiliais()">
-                                    <option value="hoje">Hoje</option>
-                                    <option value="semana">Esta semana</option>
-                                    <option value="mes" selected>Este mês</option>
-                                    <option value="todos">Todos os tempos</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <!-- Busca por nome -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Buscar por nome da filial</label>
-                            <input type="text" id="searchFilial" placeholder="Digite o nome da filial..." 
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                   oninput="filterFiliais()">
-                        </div>
-                        
-                        <!-- Botões de ação -->
-                        <div class="flex flex-wrap gap-3">
-                            <button onclick="clearFilters()" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-                                <i class="fas fa-eraser mr-2"></i>Limpar Filtros
-                            </button>
-                            <button onclick="sendWhatsAppToUnread()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
-                                <i class="fab fa-whatsapp mr-2"></i>Enviar WhatsApp para Filiais Sem Leitura Hoje
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Resumo -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                        <div class="bg-blue-50 p-4 rounded-lg text-center">
-                            <div class="text-2xl font-bold text-blue-600" id="totalFiliais">0</div>
-                            <div class="text-sm text-blue-800">Total de Filiais</div>
-                        </div>
-                        <div class="bg-green-50 p-4 rounded-lg text-center">
-                            <div class="text-2xl font-bold text-green-600" id="filiaisLidas">0</div>
-                            <div class="text-sm text-green-800">Com Leituras</div>
-                        </div>
-                        <div class="bg-red-50 p-4 rounded-lg text-center">
-                            <div class="text-2xl font-bold text-red-600" id="filiaisNaoLidas">0</div>
-                            <div class="text-sm text-red-800">Sem Leituras</div>
-                        </div>
-                        <div class="bg-purple-50 p-4 rounded-lg text-center">
-                            <div class="text-2xl font-bold text-purple-600" id="percentualLeituras">0%</div>
-                            <div class="text-sm text-purple-800">Taxa de Leitura</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Lista de Filiais -->
-                    <div class="overflow-x-auto">
-                        <table class="w-full border-collapse bg-white">
-                            <thead>
-                                <tr class="bg-gray-50">
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
-                                        <i class="fas fa-building mr-2"></i>Filial
-                                    </th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
-                                        <i class="fas fa-tag mr-2"></i>Tipo
-                                    </th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
-                                        <i class="fas fa-check-circle mr-2"></i>Status
-                                    </th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
-                                        <i class="fas fa-calendar mr-2"></i>Última Leitura
-                                    </th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
-                                        <i class="fas fa-hashtag mr-2"></i>Total de Leituras
-                                    </th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
-                                        <i class="fab fa-whatsapp mr-2"></i>WhatsApp
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody id="filiaisTable">
-                                <!-- Dados serão inseridos aqui -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Seção Gerenciar Usuários (Admin) -->
-            <div id="usuariosSection" class="hidden fade-in">
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">👥 Gerenciar Usuários</h2>
-                    
-                    <!-- Adicionar Novo Usuário -->
-                    <div class="bg-green-50 p-6 rounded-lg mb-6">
-                        <h3 class="text-lg font-semibold text-green-800 mb-4">➕ Adicionar Novo Usuário</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
-                                <input type="text" id="newUserName" placeholder="Ex: João Silva" required
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Email/Login *</label>
-                                <input type="text" id="newUserEmail" placeholder="Ex: joao@empresa.com" required
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Senha *</label>
-                                <input type="password" id="newUserPassword" placeholder="Digite a senha" required
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
-                            </div>
-                        </div>
-                        <button onclick="addNewUser()" 
-                                class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
-                            <i class="fas fa-user-plus mr-2"></i>Adicionar Usuário
-                        </button>
-                    </div>
-                    
-                    <!-- Lista de Usuários -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">📋 Usuários Cadastrados</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full border-collapse bg-white">
-                                <thead>
-                                    <tr class="bg-gray-50">
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Nome</th>
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Email/Login</th>
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tipo</th>
-                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="usuariosTable">
-                                    <!-- Dados serão inseridos aqui -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Seção Configurar WhatsApp (Admin) -->
-            <div id="whatsapp-configSection" class="hidden fade-in">
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">📱 Configurar WhatsApp das Filiais</h2>
-                    
-                    <!-- Filtros -->
-                    <div class="bg-gray-50 p-4 rounded-lg mb-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Buscar Filial</label>
-                                <input type="text" id="searchWhatsAppFilial" placeholder="Digite o nome da filial..." 
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                       oninput="filterWhatsAppFiliais()">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Filtrar por Tipo</label>
-                                <select id="whatsappTipoFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="filterWhatsAppFiliais()">
-                                    <option value="">Todos os tipos</option>
-                                    <option value="cargas">Cargas</option>
-                                    <option value="passagens">Passagens</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Lista de Filiais para Editar WhatsApp -->
-                    <div class="overflow-x-auto">
-                        <table class="w-full border-collapse bg-white">
-                            <thead>
-                                <tr class="bg-gray-50">
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Filial</th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tipo</th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">WhatsApp Atual</th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Novo WhatsApp</th>
-                                    <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="whatsappConfigTable">
-                                <!-- Dados serão inseridos aqui -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div id="graficosSection" class="hidden fade-in">
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">📊 Relatórios Gráficos</h2>
-                    
-                    <!-- Filtros -->
-                    <div class="bg-gray-50 p-6 rounded-lg mb-6">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Filtros do Relatório</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-                            <!-- Tipo de Relatório -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Relatório *</label>
-                                <select id="reportType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="updateReportFilters()">
-                                    <option value="">Selecione o tipo</option>
-                                    <option value="malotes">Relatório de Malotes (Leituras)</option>
-                                    <option value="lavagem">Relatório de Lavagem</option>
-                                    <option value="troca">Relatório de Trocas</option>
-                                </select>
-                            </div>
-                            
-                            <!-- Subtipo (para trocas) -->
-                            <div id="subTypeDiv" class="hidden">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Troca *</label>
-                                <select id="subType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                                    <option value="">Todos</option>
-                                    <option value="malote">Malote</option>
-                                    <option value="cadeado">Cadeado</option>
-                                </select>
-                            </div>
-                            
-                            <!-- Tipo de Operação -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Operação</label>
-                                <select id="operationType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                                    <option value="">Todos</option>
-                                    <option value="cargas">Cargas</option>
-                                    <option value="passagens">Passagens</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            <!-- Data Inicial -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Data Inicial *</label>
-                                <input type="date" id="reportStartDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            </div>
-                            
-                            <!-- Data Final -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Data Final *</label>
-                                <input type="date" id="reportEndDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            </div>
-                        </div>
-                        
-                        <!-- Filtro por Filial -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Filtrar por Filial</label>
-                            <select id="reportFilialFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                                <option value="">Todas as filiais</option>
-                            </select>
-                        </div>
-                        
-                        <!-- Botão Gerar -->
-                        <button onclick="generateGraphicReport()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium">
-                            <i class="fas fa-chart-bar mr-2"></i>Gerar Relatório
-                        </button>
-                    </div>
-                    
-                    <!-- Resultados -->
-                    <div id="reportGraphicResults" class="hidden">
-                        <!-- Resumo -->
-                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg mb-6">
-                            <h4 class="text-xl font-bold mb-2">📈 Resumo do Relatório</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div class="text-center">
-                                    <div class="text-2xl font-bold" id="totalRecords">0</div>
-                                    <div class="text-sm opacity-90">Total de Registros</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="text-2xl font-bold" id="totalCargas">0</div>
-                                    <div class="text-sm opacity-90">Cargas</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="text-2xl font-bold" id="totalPassagens">0</div>
-                                    <div class="text-sm opacity-90">Passagens</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Gráfico por Filial -->
-                        <div class="bg-white border rounded-lg p-6 mb-6">
-                            <h4 class="text-lg font-bold text-gray-800 mb-4">📊 Distribuição por Filial</h4>
-                            <div id="filialChart" class="h-64 flex items-end justify-center space-x-2 bg-gray-50 rounded-lg p-4">
-                                <!-- Gráfico será inserido aqui -->
-                            </div>
-                        </div>
-                        
-                        <!-- Gráfico por Tipo -->
-                        <div class="bg-white border rounded-lg p-6 mb-6">
-                            <h4 class="text-lg font-bold text-gray-800 mb-4">🔄 Distribuição por Tipo</h4>
-                            <div id="typeChart" class="h-64 flex items-center justify-center space-x-8 bg-gray-50 rounded-lg p-4">
-                                <!-- Gráfico será inserido aqui -->
-                            </div>
-                        </div>
-                        
-                        <!-- Tabela Detalhada -->
-                        <div class="bg-white border rounded-lg p-6">
-                            <h4 class="text-lg font-bold text-gray-800 mb-4">📋 Dados Detalhados</h4>
-                            <div class="overflow-x-auto">
-                                <table class="w-full border-collapse">
-                                    <thead>
-                                        <tr class="bg-gray-50">
-                                            <th class="border border-gray-300 px-3 py-2 text-left text-sm font-semibold">Filial</th>
-                                            <th class="border border-gray-300 px-3 py-2 text-left text-sm font-semibold">Tipo</th>
-                                            <th class="border border-gray-300 px-3 py-2 text-left text-sm font-semibold" id="dynamicColumn">Info</th>
-                                            <th class="border border-gray-300 px-3 py-2 text-left text-sm font-semibold">Data</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="reportDetailTable">
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        
-                        <!-- Botões de Exportação -->
-                        <div class="mt-6 flex flex-wrap justify-center gap-4">
-                            <button onclick="exportToExcel()" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-medium">
-                                <i class="fas fa-file-excel mr-2"></i>Exportar Excel
-                            </button>
-                            <button onclick="exportToPDF()" class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition font-medium">
-                                <i class="fas fa-file-pdf mr-2"></i>Exportar PDF
-                            </button>
-                            <button onclick="printReport()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium">
-                                <i class="fas fa-print mr-2"></i>Imprimir
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Botões flutuantes -->
-        <button onclick="toggleFloatingMenu()" class="fixed top-20 left-6 bg-gray-800 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-all duration-200 hover:scale-110 z-40">
-            <i class="fas fa-bars text-lg"></i>
-        </button>
-        
-        <button id="reportButton" onclick="showReportModal()" class="fixed top-32 right-6 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-200 hover:scale-110 z-30 hidden">
-            <i class="fas fa-filter text-xl"></i>
+        <button onclick="confirmLogout()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+            <i class="fas fa-sign-out-alt mr-2"></i>Sair
         </button>
     </div>
+</div>
 
-    <!-- Modal de Relatórios -->
-    <div id="reportModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div class="p-6 border-b">
-                <div class="flex items-center justify-between">
-                    <h3 class="text-xl font-bold text-gray-800">Gerar Relatório</h3>
-                    <button onclick="closeReportModal()" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="p-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Data Inicial</label>
-                        <input type="date" id="startDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Data Final</label>
-                        <input type="date" id="endDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                    </div>
-                </div>
-                
-                <div class="mb-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Filtrar por Filial</label>
-                    <select id="filialFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                        <option value="">Todas as filiais</option>
-                    </select>
-                </div>
-                
-                <button onclick="generateReport()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium">
-                    Gerar Relatório
-                </button>
-                
-                <div id="reportResults" class="mt-6 hidden">
-                    <h4 class="font-bold text-gray-800 mb-4">Resultados:</h4>
-                    <div class="overflow-x-auto">
-                        <table class="w-full border-collapse">
-                            <thead>
-                                <tr class="bg-gray-50">
-                                    <th class="border border-gray-300 px-3 py-2 text-left text-sm font-semibold">Filial</th>
-                                    <th class="border border-gray-300 px-3 py-2 text-left text-sm font-semibold">Tipo</th>
-                                    <th class="border border-gray-300 px-3 py-2 text-left text-sm font-semibold">Data</th>
-                                </tr>
-                            </thead>
-                            <tbody id="reportTable">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+<script>
+    function confirmLogout() {
+        if (confirm("Tem certeza que deseja sair?")) {
+            logout();
+        }
+    }
+
+    function logout() {
+        // Implemente a lógica de logout aqui
+        // Por exemplo:
+        window.location.href = "/login";
+    }
+</script>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Malotes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .nav {
+      background-color: #333;
+      padding: 10px;
+    }
+
+    .nav-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-item {
+      display: inline-block;
+      margin-right: 20px;
+    }
+
+    .nav-link {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .section {
+      background-color: #f7f7f7;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      font-size: 18px;
+      color: #666;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Controle de Malotes</h1>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><a class="nav-link" href="#">Entrada de Malotes</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Troca de Malotes</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Histórico de Movimentações</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="section">
+      <h2 class="title">Estoque Atual</h2>
+      <p class="description" id="malotesStock">0 malotes</p>
+    </section>
+
+    <section class="section">
+      <h2 class="title">Entrada de Malotes</h2>
+      <form class="form">
+        <label class="label" for="malotesEntrada">Quantidade:</label>
+        <input class="input" type="number" id="malotesEntrada" min="1" placeholder="Ex: 10">
+        <button class="button" type="submit" onclick="adicionarMalotes()">Adicionar ao Estoque</button>
+      </form>
+    </section>
+
+    <section class="section">
+      <h2 class="title">Troca de Malotes</h2>
+      <form class="form">
+        <label class="label" for="maloteCidade">Cidade:</label>
+        <input class="input" type="text" id="maloteCidade" placeholder="Ex: Campo Grande">
+        <label class="label" for="maloteNumero">Número do Malote:</label>
+        <input class="input" type="text" id="maloteNumero" placeholder="Ex: M-001">
+        <label class="label" for="maloteMotivo">Motivo da Troca:</label>
+        <input class="input" type="text" id="maloteMotivo" placeholder="Ex: Malote danificado">
+        <button class="button" type="submit" onclick="trocarMalote()">Registrar Troca</button>
+      </form>
+    </section>
+
+    <section class="section">
+      <h2 class="title">Histórico de Movimentações</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Quantidade</th>
+            <th>Motivo</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody id="malotesHistorico">
+          <!-- Dados serão inseridos aqui -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="copyright">&copy; 2023
+
+ <!-- Seção Leituras -->
+<div id="leiturasSection" class="hidden fade-in">
+  <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+    <div class="mb-6">
+      <div id="greetingMessage" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-lg mb-4">
+        <h3 class="text-lg font-semibold">Carregando...</h3>
+      </div>
+      <h2 class="text-xl font-bold text-gray-800">Leitura de Códigos</h2>
     </div>
+    
+    <div class="mb-6">
+      <label class="block text-sm font-medium text-gray-700 mb-2">Campo de Leitura (Digite manualmente ou use o leitor)</label>
+      <input type="text" id="barcodeInput" placeholder="Digite o código ou escaneie com o leitor..." 
+             class="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg">
+      <p class="text-sm text-gray-600 mt-2">💡 Digite o código e pressione Enter para registrar</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hidden {
+    display: none;
+  }
+
+  .fade-in {
+    animation: fadeIn 1s;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .bg-white {
+    background-color: #fff;
+  }
+
+  .rounded-xl {
+    border-radius: 0.5rem;
+  }
+
+  .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .p-6 {
+    padding: 1.5rem;
+  }
+
+  .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .bg-gradient-to-r {
+    background-image: linear-gradient(to right, #333, #555);
+  }
+
+  .from-blue-500 {
+    background-color: #2196f3;
+  }
+
+  .to-purple-600 {
+    background-color: #7a288a;
+  }
+
+  .text-white {
+    color: #fff;
+  }
+
+  .p-4 {
+    padding: 1rem;
+  }
+
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+
+  .text-lg {
+    font-size: 1.125rem;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .text-xl {
+    font-size: 1.25rem;
+  }
+
+  .font-bold {
+    font-weight: 700;
+  }
+
+  .text-gray-800 {
+    color: #333;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .text-sm {
+    font-size: 0.875rem;
+  }
+
+  .font-medium {
+    font-weight: 500;
+  }
+
+  .text-gray-700 {
+    color: #4f4f4f;
+  }
+
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .border-2 {
+    border-width: 2px;
+  }
+
+  .border-blue-300 {
+    border-color: #3498db;
+  }
+
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .focus:ring-2 {
+    box-shadow: 0 0 0 2px #3498db;
+  }
+
+  .focus:ring-blue-500 {
+    box-shadow: 0 0 0 2px #3498db;
+  }
+
+  .focus:border-transparent {
+    border-color: transparent;
+  }
+
+  .text-lg {
+    font-size: 1.125rem;
+  }
+
+  .text-gray-600 {
+    color: #666;
+  }
+
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+</style>
+<!-- Área de feedback -->
+<div id="feedbackMessage" class="mt-3 p-3 rounded-lg hidden">
+  <span id="feedbackText"></span>
+</div>
+
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse bg-white">
+    <thead>
+      <tr class="bg-gray-50">
+        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Filial</th>
+        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tipo</th>
+        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Data</th>
+      </tr>
+    </thead>
+    <tbody id="malotesTable">
+      <!-- Dados serão inseridos aqui -->
+    </tbody>
+  </table>
+</div>
+
+<style>
+  #feedbackMessage {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  #feedbackMessage.hidden {
+    display: none;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f0f0f0;
+  }
+
+  .bg-gray-50 {
+    background-color: #f7f7f7;
+  }
+
+  .border-gray-300 {
+    border-color: #ddd;
+  }
+
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .text-gray-700 {
+    color: #4f4f4f;
+  }
+
+  .mt-3 {
+    margin-top: 0.75rem;
+  }
+
+  .p-3 {
+    padding: 0.75rem;
+  }
+
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .border-collapse {
+    border-collapse: collapse;
+  }
+
+  .bg-white {
+    background-color: #fff;
+  }
+</style>
+<!-- Outras seções (placeholder) -->
+<div id="cadeadosSection" class="hidden fade-in">
+  <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+    <h2 class="text-xl font-bold text-gray-800 mb-6">Controle de Cadeados</h2>
+    
+    <!-- Estoque Atual -->
+    <div class="bg-purple-50 p-4 rounded-lg mb-6">
+      <h3 class="text-lg font-semibold text-purple-800 mb-2"> Estoque Atual</h3>
+      <p class="text-2xl font-bold text-purple-600" id="cadeadosStock">0 cadeados</p>
+    </div>
+    
+    <!-- Entrada de Cadeados -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="bg-green-50 p-4 rounded-lg">
+        <h3 class="text-lg font-semibold text-green-800 mb-4"> Entrada de Cadeados</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Quantidade</label>
+            <input type="number" id="cadeadosEntrada" min="1" placeholder="Ex: 15" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+          </div>
+          <button onclick="adicionarCadeados()" 
+                  class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+            Adicionar ao Estoque
+          </button>
+        </div>
+      </div>
+      
+      <!-- Troca de Cadeados -->
+      <div class="bg-orange-50 p-4 rounded-lg">
+        <h3 class="text-lg font-semibold text-orange-800 mb-4"> Troca de Cadeado</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Cidade *</label>
+            <input type="text" id="cadeadoCidade" placeholder="Ex: Dourados" required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Número do Cadeado *</label>
+            <input type="text" id="cadeadoNumero" placeholder="Ex: C-001" required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Motivo da Troca *</label>
+            <input type="text" id="cadeadoMotivo" placeholder="Ex: Cadeado quebrado" required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+          </div>
+          <button onclick="trocarCadeado()" 
+                  class="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition">
+            Registrar Troca
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* CSS aqui */
+  .hidden {
+    display: none;
+  }
+
+  .fade-in {
+    animation: fadeIn 1s;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .bg-white {
+    background-color: #fff;
+  }
+
+  .rounded-xl {
+    border-radius: 0.5rem;
+  }
+
+  .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .p-6 {
+    padding: 1.5rem;
+  }
+
+  .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .text-xl {
+    font-size: 1.25rem;
+  }
+
+  .font-bold {
+    font-weight: 700;
+  }
+
+  .text-gray-800 {
+    color: #333;
+  }
+
+
+   <!-- Histórico de Movimentações -->
+<div>
+  <h3 class="text-lg font-semibold text-gray-800 mb-4"> Histórico de Movimentações</h3>
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse bg-white">
+      <thead>
+        <tr class="bg-gray-50">
+          <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tipo</th>
+          <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Quantidade</th>
+          <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Motivo</th>
+          <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Data</th>
+        </tr>
+      </thead>
+      <tbody id="cadeadosHistorico">
+        <!-- Dados serão inseridos aqui -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  /* CSS aqui */
+  .text-lg {
+    font-size: 1.125rem;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .text-gray-800 {
+    color: #333;
+  }
+
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .border-collapse {
+    border-collapse: collapse;
+  }
+
+  .bg-white {
+    background-color: #fff;
+  }
+
+  .bg-gray-50 {
+    background-color: #f7f7f7;
+  }
+
+  .border {
+    border: 1px solid #ddd;
+  }
+
+  .border-gray-300 {
+    border-color: #ddd;
+  }
+
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .text-gray-700 {
+    color: #4f4f4f;
+  }
+</style>
+
+<!-- Lavagem Section -->
+<div id="lavagemSection" class="hidden fade-in">
+  <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+    <h2 class="text-xl font-bold text-gray-800 mb-6">Controle de Lavagem</h2>
+    
+    <!-- Registro de Lavagem -->
+    <div class="bg-cyan-50 p-4 rounded-lg mb-6">
+      <h3 class="text-lg font-semibold text-cyan-800 mb-4"> Registro de Lavagem</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Cidade *</label>
+          <input type="text" id="lavagemCidade" placeholder="Ex: Campo Grande" required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Número *</label>
+          <input type="text" id="lavagemNumero" placeholder="Ex: L-001" required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500">
+        </div>
+      </div>
+      <button onclick="registrarLavagem()" 
+              class="w-full mt-4 bg-cyan-600 text-white py-2 rounded-lg hover:bg-cyan-700 transition">
+        Registrar Lavagem
+      </button>
+    </div>
+    
+    <!-- Histórico de Lavagens -->
+    <div>
+      <h3 class="text-lg font-semibold text-gray-800 mb-4"> Histórico de Lavagens</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse bg-white">
+          <thead>
+            <tr class="bg-gray-50">
+              <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Cidade</th>
+              <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Número</th>
+              <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Data</th>
+            </tr>
+          </thead>
+          <tbody id="lavagemHistorico">
+            <!-- Dados serão inseridos aqui -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Troca Section -->
+<div id="trocaSection" class="hidden fade-in">
+  <div class="bg-white rounded-xl shadow-lg p-6">
+    <h2 class="text-xl font-bold text-gray-800 mb-6"> Registro de Trocas</h2>
+    <p class="text-gray-600 mb-6">Histórico de todas as trocas de malotes e cadeados realizadas</p>
+    
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white">
+        <thead>
+          <tr class="bg-gray-50">
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Filial</th>
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tipo</th>
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Troca</th>
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Motivo</th>
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Data</th>
+          </tr>
+        </thead>
+        <tbody id="trocasTable">
+          <!-- Dados serão inseridos aqui -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* CSS aqui */
+  .bg-white {
+    background-color: #fff;
+  }
+
+  .rounded-xl {
+    border-radius: 0.5rem;
+  }
+
+  .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .p-6 {
+   
+
+  <!-- Seção Filiais -->
+<div id="filiaisSection" class="hidden fade-in">
+  <div class="bg-white rounded-xl shadow-lg p-6">
+    <h2 class="text-xl font-bold text-gray-800 mb-6"> Controle de Filiais</h2>
+    
+    <!-- Filtros -->
+    <div class="bg-gray-50 p-6 rounded-lg mb-6">
+      <h3 class="text-lg font-semibold text-gray-800 mb-4">Filtros</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <!-- Filtro por Status -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Status de Leitura</label>
+          <select id="statusFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="filterFiliais()">
+            <option value="">Todas as filiais</option>
+            <option value="lidas">Filiais com leituras</option>
+            <option value="nao-lidas">Filiais sem leituras</option>
+          </select>
+        </div>
+        
+        <!-- Filtro por Tipo -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Operação</label>
+          <select id="tipoFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="filterFiliais()">
+            <option value="">Todos os tipos</option>
+            <option value="cargas">Cargas</option>
+            <option value="passagens">Passagens</option>
+          </select>
+        </div>
+        
+        <!-- Filtro por Período -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Período de Análise</label>
+          <select id="periodoFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="filterFiliais()">
+            <option value="hoje">Hoje</option>
+            <option value="semana">Esta semana</option>
+            <option value="mes" selected>Este mês</option>
+            <option value="todos">Todos os tempos</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Busca por nome -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Buscar por nome da filial</label>
+        <input type="text" id="searchFilial" placeholder="Digite o nome da filial..." 
+               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+               oninput="filterFiliais()">
+      </div>
+      
+      <!-- Botões de ação -->
+      <div class="flex flex-wrap gap-3">
+        <button onclick="clearFilters()" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
+          <i class="fas fa-eraser mr-2"></i>Limpar Filtros
+        </button>
+        <button onclick="sendWhatsAppToUnread()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+          <i class="fab fa-whatsapp mr-2"></i>Enviar WhatsApp para Filiais Sem Leitura Hoje
+        </button>
+      </div>
+    </div>
+    
+    <!-- Resumo -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-blue-50 p-4 rounded-lg text-center">
+        <div class="text-2xl font-bold text-blue-600" id="totalFiliais">0</div>
+        <div class="text-sm text-blue-800">Total de Filiais</div>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg text-center">
+        <div class="text-2xl font-bold text-green-600" id="filiaisLidas">0</div>
+        <div class="text-sm text-green-800">Com Leituras</div>
+      </div>
+      <div class="bg-red-50 p-4 rounded-lg text-center">
+        <div class="text-2xl font-bold
+<!-- Lista de Filiais -->
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse bg-white">
+    <thead>
+      <tr class="bg-gray-50">
+        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
+          <i class="fas fa-building mr-2"></i>Filial
+        </th>
+        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
+          <i class="fas fa-tag mr-2"></i>Tipo
+        </th>
+        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
+          <i class="fas fa-check-circle mr-2"></i>Status
+        </th>
+        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
+          <i class="fas fa-calendar mr-2"></i>Última Leitura
+        </th>
+        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
+          <i class="fas fa-hashtag mr-2"></i>Total de Leituras
+        </th>
+        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">
+          <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+        </th>
+      </tr>
+    </thead>
+    <tbody id="filiaisTable">
+      <!-- Dados serão inseridos aqui -->
+    </tbody>
+  </table>
+</div>
+  <!-- Seção Gerenciar Usuários (Admin) -->
+<div id="usuariosSection" class="hidden fade-in">
+  <div class="bg-white rounded-xl shadow-lg p-6">
+    <h2 class="text-xl font-bold text-gray-800 mb-6">👥 Gerenciar Usuários</h2>
+    
+    <!-- Adicionar Novo Usuário -->
+    <div class="bg-green-50 p-6 rounded-lg mb-6">
+      <h3 class="text-lg font-semibold text-green-800 mb-4">➕ Adicionar Novo Usuário</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
+          <input type="text" id="newUserName" placeholder="Ex: João Silva" required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Email/Login *</label>
+          <input type="text" id="newUserEmail" placeholder="Ex: joao@empresa.com" required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Senha *</label>
+          <input type="password" id="newUserPassword" placeholder="Digite a senha" required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+        </div>
+      </div>
+      <button onclick="addNewUser()" 
+              class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+        <i class="fas fa-user-plus mr-2"></i>Adicionar Usuário
+      </button>
+    </div>
+    
+    <!-- Lista de Usuários -->
+    <div>
+      <h3 class="text-lg font-semibold text-gray-800 mb-4">📋 Usuários Cadastrados</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse bg-white">
+          <thead>
+            <tr class="bg-gray-50">
+              <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Nome</th>
+              <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Email/Login</th>
+              <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tipo</th>
+              <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="usuariosTable">
+            <!-- Dados serão inseridos aqui -->
+            <tr>
+              <td>João Silva</td>
+              <td>joao@empresa.com</td>
+              <td>Administrador</td>
+              <td>
+                <button onclick="editUser(this)" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+                  <i class="fas fa-edit mr-2"></i>Editar
+                </button>
+                <button onclick="deleteUser(this)" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition">
+                  <i class="fas fa-trash-alt mr-2"></i>Excluir
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Função para adicionar novo usuário
+  function addNewUser() {
+    // Código para adicionar novo usuário
+  }
+
+  // Função para editar usuário
+  function editUser(element) {
+    // Obter o nome e email do usuário
+    var nome = element.parentNode.parentNode.cells[0].textContent;
+    var email = element.parentNode.parentNode.cells[1].textContent;
+    
+    // Abrir um modal para editar o usuário
+    var modal = document.getElementById("editUserModal");
+    modal.style.display = "block";
+    
+    // Preencher os campos do modal com os
+
+ <!-- Seção Configurar WhatsApp (Admin) -->
+<div id="whatsapp-configSection" class="hidden fade-in">
+  <div class="bg-white rounded-xl shadow-lg p-6">
+    <h2 class="text-xl font-bold text-gray-800 mb-6">📱 Configurar WhatsApp das Filiais</h2>
+    
+    <!-- Filtros -->
+    <div class="bg-gray-50 p-4 rounded-lg mb-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Buscar Filial</label>
+          <input type="text" id="searchWhatsAppFilial" placeholder="Digite o nome da filial..." 
+                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                 oninput="filterWhatsAppFiliais()">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Filtrar por Tipo</label>
+          <select id="whatsappTipoFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="filterWhatsAppFiliais()">
+            <option value="">Todos os tipos</option>
+            <option value="cargas">Cargas</option>
+            <option value="passagens">Passagens</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Lista de Filiais para Editar WhatsApp -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white">
+        <thead>
+          <tr class="bg-gray-50">
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Filial</th>
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tipo</th>
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">WhatsApp Atual</th>
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Novo WhatsApp</th>
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="whatsappConfigTable">
+          <!-- Dados serão inseridos aqui -->
+          <tr>
+            <td>Filial 1</td>
+            <td>Cargas</td>
+            <td>(11) 1234-5678</td>
+            <td>
+              <input type="text" id="newWhatsApp" placeholder="Digite o novo WhatsApp...">
+            </td>
+            <td>
+              <button onclick="editWhatsApp(this)" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+                <i class="fas fa-edit mr-2"></i>Editar
+              </button>
+              <button onclick="deleteWhatsApp(this)" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition">
+                <i class="fas fa-trash-alt mr-2"></i>Excluir
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Função para editar WhatsApp
+  function editWhatsApp(element) {
+    // Obter o novo WhatsApp
+    var newWhatsApp = element.parentNode.parentNode.cells[3].children[0].value;
+    
+    // Atualizar o WhatsApp
+    // Código para atualizar o WhatsApp
+  }
+
+  // Função para excluir WhatsApp
+  function deleteWhatsApp(element) {
+    // Confirmar a exclusão
+    if (confirm("Deseja excluir o WhatsApp?")) {
+      // Excluir o WhatsApp
+      // Código para excluir o WhatsApp
+    }
+  }
+</script>
+
+  <!-- Seção Relatórios Gráficos -->
+<div id="graficosSection" class="hidden fade-in">
+  <div class="bg-white rounded-xl shadow-lg p-6">
+    <h2 class="text-xl font-bold text-gray-800 mb-6">📊 Relatórios Gráficos</h2>
+    
+    <!-- Filtros -->
+    <div class="bg-gray-50 p-6 rounded-lg mb-6">
+      <h3 class="text-lg font-semibold text-gray-800 mb-4">Filtros do Relatório</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+        <!-- Tipo de Relatório -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Relatório *</label>
+          <select id="reportType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="updateReportFilters()">
+            <option value="">Selecione o tipo</option>
+            <option value="malotes">Relatório de Malotes (Leituras)</option>
+            <option value="lavagem">Relatório de Lavagem</option>
+            <option value="troca">Relatório de Trocas</option>
+          </select>
+        </div>
+        
+        <!-- Subtipo (para trocas) -->
+        <div id="subTypeDiv" class="hidden">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Troca *</label>
+          <select id="subType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            <option value="">Todos</option>
+            <option value="malote">Malote</option>
+            <option value="cadeado">Cadeado</option>
+          </select>
+        </div>
+        
+        <!-- Tipo de Operação -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Operação</label>
+          <select id="operationType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            <option value="">Todos</option>
+            <option value="cargas">Cargas</option>
+            <option value="passagens">Passagens</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <!-- Data Inicial -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Data Inicial *</label>
+          <input type="date" id="reportStartDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+        </div>
+        
+        <!-- Data Final -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Data Final *</label>
+          <input type="date" id="reportEndDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+        </div>
+      </div>
+      
+      <!-- Filtro por Filial -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Filtrar por Filial</label>
+        <select id="reportFilialFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+          <option value="">Todas as filiais</option>
+        </select>
+      </div>
+      
+      <!-- Botão Gerar -->
+      <button onclick="generateGraphicReport()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium">
+        <i class="fas fa-chart-bar mr-2"></i>Gerar Relatório
+      </button>
+    </div>
+    
+    <!-- Resultados -->
+    <div id="reportGraphicResults" class="hidden">
+      <!-- Resumo -->
+      <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg mb-6">
+        <h4 class="text-xl font-bold mb-2">📈 Resumo do Relatório</h4>
+        <div class="
+<!-- Botões de Exportação -->
+<div class="mt-6 flex flex-wrap justify-center gap-4">
+  <button onclick="exportToExcel()" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-medium">
+    <i class="fas fa-file-excel mr-2"></i>Exportar Excel
+  </button>
+  <button onclick="exportToPDF()" class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition font-medium">
+    <i class="fas fa-file-pdf mr-2"></i>Exportar PDF
+  </button>
+  <button onclick="printReport()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium">
+    <i class="fas fa-print mr-2"></i>Imprimir
+  </button>
+</div>
+
+<!-- Botões flutuantes -->
+<button onclick="toggleFloatingMenu()" class="fixed top-20 left-6 bg-gray-800 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-all duration-200 hover:scale-110 z-40">
+  <i class="fas fa-bars text-lg"></i>
+</button>
+
+<button id="reportButton" onclick="showReportModal()" class="fixed top-32 right-6 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-200 hover:scale-110 z-30 hidden">
+  <i class="fas fa-filter text-xl"></i>
+</button>
+
+<!-- Modal de Relatórios -->
+<div id="reportModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+    <div class="p-6 border-b">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold text-gray-800">Gerar Relatório</h3>
+        <button onclick="closeReportModal()" class="text-gray-500 hover:text-gray-700">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Data Inicial</label>
+          <input type="date" id="startDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Data Final</label>
+          <input type="date" id="endDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+        </div>
+      </div>
+      
+      <div class="mb-6">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Filtrar por Filial</label>
+        <select id="filialFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+          <option value="">Todas as filiais</option>
+        </select>
+      </div>
+      
+      <button onclick="generateReport()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium">
+        Gerar Relatório
+      </button>
+      
+      <div id="reportResults" class="mt-6 hidden">
+        <h4 class="font-bold text-gray-800 mb-4">Resultados:</h4>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="border border-gray-300 px-3 py-2 text-left text-sm font-semibold">Filial</th>
+                <th class="border border-gray-300 px-3 py-2 text-left text-sm font-semibold">Tipo</th>
+                <th class="border border-gray-300 px-3 py-2 text-left text-sm font-semibold">Data</th>
+              </tr>
+            </thead>
+            <tbody id="
 
     <!-- Firebase Scripts -->
     <script type="module">
@@ -3648,5 +4094,4 @@ Entre em contato conosco se precisar de ajuda!
             console.log('📱 Água Clara-02 será verificada diariamente às 04:08');
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97221cba401eaf70',t:'MTc1NTY5NTIzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
