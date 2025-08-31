@@ -1,4 +1,4 @@
-<!-- cadastro.html (tela de cadastro) -->
+<!-- cadastro.html (Tela de Cadastro) -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -55,7 +55,7 @@
                     senha: senha
                 }).then(() => {
                     alert("Cadastro realizado com sucesso!");
-                    window.location.href = "index.html";
+                    window.location.href = "index.html"; // Redireciona de volta à tela de login
                 }).catch((error) => {
                     alert("Erro ao cadastrar: " + error.message);
                 });
