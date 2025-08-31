@@ -2,68 +2,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="titulo">Cadastro</h1>
-        <form>
-            <div class="campo">
-                <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="Digite seu email">
-            </div>
-            <div class="campo">
-                <label for="usuario">Usuário:</label>
-                <input type="text" id="usuario" placeholder="Digite seu usuário">
-            </div>
-            <div class="campo">
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" placeholder="Digite sua senha">
-            </div>
-            <div class="botoes">
-                <button type="button" class="btn-cadastrar" onclick="cadastrar()">Cadastrar</button>
-            </div>
-        </form>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-        <script>
-            const firebaseConfig = {
-                apiKey: "AIzaSyAxKkS2aLP0xJkKsT3Wp6bPzwJQZjj_8lM",
-                authDomain: "controle-financeiro-a18de.firebaseapp.com",
-                databaseURL: "https://controle-financeiro-a18de.firebaseio.com",
-                projectId: "controle-financeiro-a18de",
-                storageBucket: "controle-financeiro-a18de.appspot.com",
-                messagingSenderId: "963247049876",
-                appId: "1:963247049876:web:be8c9355342ea3a0fbb881"
-            };
+  <div class="container">
+    <h1 class="titulo">Cadastro</h1>
+    <form>
+      <div class="campo">
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Digite seu email">
+      </div>
+      <div class="campo">
+        <label for="usuario">Usuário:</label>
+        <input type="text" id="usuario" placeholder="Digite seu usuário">
+      </div>
+      <div class="campo">
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" placeholder="Digite sua senha">
+      </div>
+      <div class="botoes">
+        <button type="button" class="btn-cadastrar" onclick="cadastrar()">Cadastrar</button>
+      </div>
+    </form>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyAxKkS2aLP0xJkKsT3Wp6bPzwJQZjj_8lM",
+        authDomain: "controle-financeiro-a18de.firebaseapp.com",
+        databaseURL: "https://controle-financeiro-a18de.firebaseio.com",
+        projectId: "controle-financeiro-a18de",
+        storageBucket: "controle-financeiro-a18de.appspot.com",
+        messagingSenderId: "963247049876",
+        appId: "1:963247049876:web:be8c9355342ea3a0fbb881"
+      };
 
-            firebase.initializeApp(firebaseConfig);
+      firebase.initializeApp(firebaseConfig);
 
-            const db = firebase.database();
+      const db = firebase.database();
 
-            function cadastrar() {
-                const email = document.getElementById("email").value;
-                const usuario = document.getElementById("usuario").value;
-                const senha = document.getElementById("senha").value;
+      function cadastrar() {
+        const email = document.getElementById("email").value;
+        const usuario = document.getElementById("usuario").value;
+        const senha = document.getElementById("senha").value;
 
-                db.ref("usuarios").push({
-                    email: email,
-                    usuario: usuario,
-                    senha: senha
-                }).then(() => {
-                    alert("Cadastro realizado com sucesso!");
-                    console.log("Cadastro realizado com sucesso!");
-                    window.location.replace("index.html");
-                }).catch((error) => {
-                    alert("Erro ao cadastrar: " + error.message);
-                    console.log("Erro ao cadastrar: " + error.message);
-                });
-                console.log("Função cadastrar executada!");
-            }
-        </script>
-    </div>
+        db.ref("usuarios").push({
+          email: email,
+          usuario: usuario,
+          senha: senha
+        }).then(() => {
+          alert("Cadastro realizado com sucesso!");
+          console.log("Cadastro realizado com sucesso!");
+          window.location.replace("index.html");
+        }).catch((error) => {
+          alert("Erro ao cadastrar: " + error.message);
+          console.log("Erro ao cadastrar: " + error.message);
+        });
+        console.log("Função cadastrar executada!");
+      }
+    </script>
+  </div>
 </body>
 </html>

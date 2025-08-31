@@ -2,58 +2,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Malotes</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle Financeiro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="titulo">Controle de Malotes</h1>
-        <form>
-            <div class="campo">
-                <label for="usuario">Usuário:</label>
-                <input type="text" id="usuario" placeholder="Digite seu usuário">
-            </div>
-            <div class="campo">
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" placeholder="Digite sua senha">
-            </div>
-            <div class="botoes">
-                <button class="btn-login" onclick="login()">Login</button>
-                <a href="cadastro.html" class="btn-cadastro">Cadastrar</a>
-            </div>
-        </form>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-        <script>
-            const firebaseConfig = {
-                apiKey: "AIzaSyAxKkS2aLP0xJkKsT3Wp6bPzwJQZjj_8lM",
-                authDomain: "controle-financeiro-a18de.firebaseapp.com",
-                databaseURL: "https://controle-financeiro-a18de.firebaseio.com",
-                projectId: "controle-financeiro-a18de",
-                storageBucket: "controle-financeiro-a18de.appspot.com",
-                messagingSenderId: "963247049876",
-                appId: "1:963247049876:web:be8c9355342ea3a0fbb881"
-            };
+  <div class="container">
+    <h1 class="titulo">Tela de Login</h1>
+    <button class="btn-cadastrar" onclick="cadastrar()">Cadastrar</button>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js"></script>
+  <script src="firebaseConfig.js"></script>
+  <script>
+    const firebaseConfig = import firebaseConfig from './firebaseConfig.js';
+    firebase.initializeApp(firebaseConfig);
 
-            firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-            const db = firebase.database();
-
-            function login() {
-                const usuario = document.getElementById("usuario").value;
-                const senha = document.getElementById("senha").value;
-
-                db.ref("usuarios").once("value", (snapshot) => {
-                    snapshot.forEach((child) => {
-                        if (child.val().usuario === usuario && child.val().senha === senha) {
-                            window.location.href = "relatorio.html";
-                        }
-                    });
-                });
-            }
-        </script>
-    </div>
+    function cadastrar() {
+      window.location.href = "cadastro.html";
+    }
+  </script>
 </body>
 </html>
