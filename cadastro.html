@@ -24,7 +24,7 @@
                 <input type="password" id="senha" placeholder="Digite sua senha">
             </div>
             <div class="botoes">
-                <button class="btn-cadastrar" onclick="cadastrar()">Cadastrar</button>
+                <button type="button" class="btn-cadastrar" onclick="cadastrar()">Cadastrar</button>
             </div>
         </form>
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -55,11 +55,13 @@
                     senha: senha
                 }).then(() => {
                     alert("Cadastro realizado com sucesso!");
+                    console.log("Cadastro realizado com sucesso!");
                     window.location.replace("index.html");
                 }).catch((error) => {
                     alert("Erro ao cadastrar: " + error.message);
+                    console.log("Erro ao cadastrar: " + error.message);
                 });
-                return false;
+                console.log("Função cadastrar executada!");
             }
         </script>
     </div>
