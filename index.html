@@ -27,18 +27,31 @@
   </div>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="firebaseConfig.js"></script>
   <script>
     const firebaseConfig = import firebaseConfig from './firebaseConfig.js';
     firebase.initializeApp(firebaseConfig);
 
     const db = firebase.database();
+    const auth = firebase.auth();
 
     function login() {
       const email = document.getElementById("email").value;
       const senha = document.getElementById("senha").value;
 
-      // código para realizar o login
+      auth.signInWithEmailAndPassword(email, senha)
+        .then((userCredential) => {
+          // Signed in
+          var user = userCredential.user;
+          alert("Login realizado com sucesso!");
+          window.location.href = "relatorio.html";
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          alert("Erro ao realizar login: " + errorMessage);
+        });
     }
 
     function cadastrar() {
