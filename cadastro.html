@@ -55,10 +55,11 @@
                     senha: senha
                 }).then(() => {
                     alert("Cadastro realizado com sucesso!");
-                    window.location.href = "index.html"; // Redireciona de volta à tela de login
+                    window.location.replace("index.html");
                 }).catch((error) => {
                     alert("Erro ao cadastrar: " + error.message);
                 });
+                return false;
             }
         </script>
     </div>
