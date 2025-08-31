@@ -20,10 +20,40 @@
                 <input type="password" id="senha" placeholder="Digite sua senha">
             </div>
             <div class="botoes">
-                <button class="btn-login">Login</button>
+                <button class="btn-login" onclick="login()">Login</button>
                 <a href="cadastro.html" class="btn-cadastro">Cadastrar</a>
             </div>
         </form>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyAxKkS2aLP0xJkKsT3Wp6bPzwJQZjj_8lM",
+                authDomain: "controle-financeiro-a18de.firebaseapp.com",
+                databaseURL: "https://controle-financeiro-a18de.firebaseio.com",
+                projectId: "controle-financeiro-a18de",
+                storageBucket: "controle-financeiro-a18de.appspot.com",
+                messagingSenderId: "963247049876",
+                appId: "1:963247049876:web:be8c9355342ea3a0fbb881"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+
+            const db = firebase.database();
+
+            function login() {
+                const usuario = document.getElementById("usuario").value;
+                const senha = document.getElementById("senha").value;
+
+                db.ref("usuarios").once("value", (snapshot) => {
+                    snapshot.forEach((child) => {
+                        if (child.val().usuario === usuario && child.val().senha === senha) {
+                            window.location.href = "relatorio.html";
+                        }
+                    });
+                });
+            }
+        </script>
     </div>
 </body>
 </html>
