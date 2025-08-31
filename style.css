@@ -1,0 +1,60 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: 300px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.campo {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.campo input {
+    width: 80%;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.botoes {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-login, .btn-cadastro, .btn-cadastrar {
+    width: 80%;
+    height: 40px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-login:hover, .btn-cadastro:hover, .btn-cadastrar:hover {
+    background-color: #3e8e41;
+}

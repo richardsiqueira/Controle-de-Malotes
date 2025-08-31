@@ -1,76 +1,29 @@
+<!-- index.html (tela de login) -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de Login</title>
-    <style>
-        /* ... */
-    </style>
+    <title>Controle de Malotes</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <div class="title">Relatório de Malotes</div>
+        <h1 class="titulo">Controle de Malotes</h1>
         <form>
-            <div class="form-group">
+            <div class="campo">
                 <label for="usuario">Usuário:</label>
                 <input type="text" id="usuario" placeholder="Digite seu usuário">
             </div>
-            <div class="form-group">
+            <div class="campo">
                 <label for="senha">Senha:</label>
                 <input type="password" id="senha" placeholder="Digite sua senha">
             </div>
-            <button class="btn-login" onclick="login()">Login</button>
-            <button class="btn-cadastro" onclick="cadastrar()">Cadastrar</button>
+            <div class="botoes">
+                <button class="btn-login">Login</button>
+                <button class="btn-cadastro" onclick="window.location.href='cadastro.html'">Cadastrar</button>
+            </div>
         </form>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyAxKkS2aLP0xJkKsT3Wp6bPzwJQZjj_8lM",
-            authDomain: "controle-financeiro-a18de.firebaseapp.com",
-            projectId: "controle-financeiro-a18de",
-            storageBucket: "controle-financeiro-a18de.firebasestorage.app",
-            messagingSenderId: "963247049876",
-            appId: "1:963247049876:web:be8c9355342ea3a0fbb881"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-
-        const auth = firebase.auth();
-
-        function login() {
-            const usuario = document.getElementById("usuario").value;
-            const senha = document.getElementById("senha").value;
-
-            auth.signInWithEmailAndPassword(usuario, senha)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    if (user.uid === "R") {
-                        window.location.href = "relatorio.html";
-                    } else {
-                        alert("Você não tem permissão para acessar o app");
-                    }
-                })
-                .catch((error) => {
-                    alert("Erro ao logar: " + error.message);
-                });
-        }
-
-        function cadastrar() {
-            const usuario = document.getElementById("usuario").value;
-            const senha = document.getElementById("senha").value;
-
-            auth.createUserWithEmailAndPassword(usuario, senha)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    alert("Usuário criado com sucesso!");
-                })
-                .catch((error) => {
-                    alert("Erro ao criar usuário: " + error.message);
-                });
-        }
-    </script>
 </body>
 </html>
