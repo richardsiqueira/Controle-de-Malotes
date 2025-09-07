@@ -24,7 +24,7 @@
         <input type="password" id="senha" placeholder="Digite sua senha">
       </div>
       <div class="botoes">
-        <button type="button" class="btn-cadastrar" onclick="cadastrar()">Cadastrar</button>
+        <button type="button" class="btn-cadastrar" id="btn-cadastrar">Cadastrar</button>
       </div>
     </form>
   </div>
@@ -39,7 +39,7 @@
     const db = firebase.database();
     const auth = firebase.auth();
 
-    function cadastrar() {
+    document.getElementById("btn-cadastrar").addEventListener("click", function() {
       const email = document.getElementById("email").value;
       const usuario = document.getElementById("usuario").value;
       const senha = document.getElementById("senha").value;
@@ -68,7 +68,7 @@
           var errorMessage = error.message;
           alert("Erro ao cadastrar: " + errorMessage);
         });
-    }
+    });
   </script>
 </body>
 </html>
