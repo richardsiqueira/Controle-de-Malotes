@@ -21,7 +21,7 @@
       </div>
       <div class="botoes">
         <button type="button" class="btn-login" onclick="login()">Login</button>
-        <button type="button" class="btn-cadastrar" onclick="cadastrar()">Cadastrar</button>
+        <button type="button" class="btn-cadastrar" onclick="window.location.href='cadastro.html'; return false;">Cadastrar</button>
       </div>
     </form>
   </div>
@@ -52,10 +52,6 @@
           var errorMessage = error.message;
           alert("Erro ao realizar login: " + errorMessage);
         });
-    }
-
-    function cadastrar() {
-      window.location.href = "cadastro.html";
     }
   </script>
 </body>
