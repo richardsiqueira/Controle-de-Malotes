@@ -4,26 +4,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Controle Financeiro</title>
+  <title>Relatório</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .campo {
+      margin-bottom: 1rem;
+    }
+
+    .tabela {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .tabela th, .tabela td {
+      padding: 0.5rem;
+      text-align: left;
+      border: 1px solid #ccc;
+    }
+
+    .tabela th {
+      background-color: #f0f0f0;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1 class="titulo">Tela de Login</h1>
-    <button class="btn-cadastrar" onclick="cadastrar()">Cadastrar</button>
+    <h1 class="titulo">Relatório</h1>
+    <form id="form-leitura">
+      <div class="campo">
+        <label for="malote">Malote:</label>
+        <input type="text" id="malote" placeholder="Digite o código de barras ou o número do malote">
+      </div>
+      <div class="botoes">
+        <button type="button" class="btn-leitura" id="btn-leitura">Leitura</button>
+      </div>
+    </form>
+    <table id="tabela-relatorio" class="tabela">
+      <thead>
+        <tr>
+          <th>Malote</th>
+          <th>Filial</th>
+          <th>Tipo</th>
+          <th>Data</th>
+          <th>Hora</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-relatorio">
+      </tbody>
+    </table>
   </div>
-  <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
   <script src="firebaseConfig.js"></script>
   <script>
     const firebaseConfig = import firebaseConfig from './firebaseConfig.js';
     firebase.initializeApp(firebaseConfig);
 
     const db = firebase.database();
+    const tabelaRelatorio = document.getElementById("tabela-relatorio");
+    const tbodyRelatorio = document.getElementById("tbody-relatorio");
+    const formLeitura = document.getElementById("form-leitura");
+    const btnLeitura = document.getElementById("btn-leitura");
+    const maloteInput = document.getElementById("malote");
 
-    function cadastrar() {
-      window.location.href = "cadastro.html";
-    }
+    btnLeitura.addEventListener("click", function() {
+      const malote = maloteInput.value;
+
+      if (malote === "") {
+        alert("Digite o código de barras ou o número do malote");
+        return;
+      }
+
+      db.ref("malotes").orderByChild("malote").equalTo(malote)
+        .once("value")
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+            const filial = data.filial;
+            const tipo = data.tipo;
+            const dataRegistro = data.dataRegistro;
+
+            const tr = document.createElement("tr");
+            const tdMalote = document.createElement("td");
+            const tdFilial = document.createElement("td");
+            const tdTipo = document.createElement("td");
+            const tdData = document.createElement("td");
+            const tdHora = document.createElement("td");
+
+            tdMalote.textContent = malote;
+            tdFilial.textContent = filial;
+            tdTipo.textContent = tipo;
+            tdData.textContent = dataRegistro;
+            const dataAtual = new Date();
+            const hora = dataAtual.getHours() + ":" + dataAtual.getMinutes() + ":" + dataAtual.getSeconds();
+            tdHora.textContent = hora;
+
+            tr.appendChild(tdMalote);
+            tr.appendChild(tdFilial);
+            tr.appendChild(tdTipo);
+            tr.appendChild(tdData);
+            tr.appendChild(tdHora);
+
+            tbodyRelatorio.appendChild(tr);
+          } else {
+            alert("Malote não encontrado");
+          }
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          alert("Erro ao buscar malote: " + errorMessage);
+        });
+    });
   </script>
 </body>
 </html>

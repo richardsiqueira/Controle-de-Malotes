@@ -4,55 +4,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Controle Financeiro</title>
+  <title>Controle de Malotes</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .campo {
+      margin-bottom: 1rem;
+    }
+
+    .titulo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1 class="titulo">Tela de Login</h1>
+    <h1 class="titulo">Controle de Malotes</h1>
     <form>
       <div class="campo">
-        <label for="email">Email:</label>
-        <input type="email" id="email" placeholder="Digite seu email">
-      </div>
-      <div class="campo">
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" placeholder="Digite sua senha">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" placeholder="Digite seu nome">
       </div>
       <div class="botoes">
-        <button type="button" class="btn-login" onclick="login()">Login</button>
-        <button type="button" class="btn-cadastrar" onclick="window.location.href='cadastro.html'; return false;">Cadastrar</button>
+        <button type="button" class="btn-acessar" id="btn-acessar">Acessar</button>
       </div>
     </form>
   </div>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="firebaseConfig.js"></script>
   <script>
     const firebaseConfig = import firebaseConfig from './firebaseConfig.js';
     firebase.initializeApp(firebaseConfig);
 
-    const db = firebase.database();
     const auth = firebase.auth();
 
-    function login() {
-      const email = document.getElementById("email").value;
-      const senha = document.getElementById("senha").value;
+    document.getElementById("btn-acessar").addEventListener("click", function() {
+      const nome = document.getElementById("nome").value;
 
-      auth.signInWithEmailAndPassword(email, senha)
+      auth.signInWithEmailAndPassword(nome, "123456")
         .then((userCredential) => {
           // Signed in
           var user = userCredential.user;
-          alert("Login realizado com sucesso!");
           window.location.href = "relatorio.html";
         })
         .catch((error) => {
           var errorCode = error.code;
           var errorMessage = error.message;
-          alert("Erro ao realizar login: " + errorMessage);
+          alert("Erro ao acessar: " + errorMessage);
         });
-    }
+    });
   </script>
 </body>
 </html>
